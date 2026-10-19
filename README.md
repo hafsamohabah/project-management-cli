@@ -1,45 +1,72 @@
 # Project Management CLI Tool
 
-A command-line project management application built with Python. It allows users to manage team members, projects, tasks, and task contributors, with data saved in a JSON file.
+## About the Project
+
+This is a Python command-line application for managing users, projects, and tasks. It was built to practise object-oriented programming, working with files, and using Python commands from the terminal.
+
+Users can create projects, assign tasks to projects, add contributors to tasks, and mark tasks as complete. The application saves its data in a JSON file so that records can be loaded again when the program is run.
 
 ## Features
 
-- **Object-oriented design:** Uses `Person`, `User`, `Project`, and `Task` classes.
-- **User management:** Create and list users.
-- **Project management:** Create projects with descriptions, due dates, and owners.
-- **Task management:** Create and list tasks, assign multiple contributors, and mark tasks as complete.
-- **JSON persistence:** Saves records to a local JSON database and restores them when the application restarts.
-- **Input validation:** Handles duplicate user emails, invalid references, and invalid task statuses.
-- **Automated tests:** Uses pytest to test models, manager functionality, and CLI commands.
+- Create and list users.
+- Create projects with titles, descriptions, due dates, and owners.
+- Create and list tasks.
+- Assign multiple contributors to a task.
+- Mark tasks as complete.
+- Save and load application data using JSON.
+- Validate project titles, task titles, task statuses, and user email uniqueness.
+- Run automated tests using pytest.
+
+## Technologies Used
+
+- Python 3
+- Object-oriented programming
+- `argparse` for command-line arguments
+- JSON for data storage
+- `pytest` for automated testing
 
 ## Requirements
 
-- Python 3.12 or a compatible Python 3 version.
-- pip.
-- A terminal.
+- Python 3.12 or a compatible version.
+- pip
 
 ## Installation
 
-1. Clone or download this repository.
-2. Navigate into the project directory.
-3. Create and activate a virtual environment:
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/hafsamohabah/project-management-cli.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd project-management-cli
+   ```
+
+3. Create a virtual environment:
 
    ```bash
    python3 -m venv .venv
+   ```
+
+4. Activate the virtual environment on Linux or WSL Ubuntu:
+
+   ```bash
    source .venv/bin/activate
    ```
 
-4. Install the dependencies:
+5. Install the dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-## Usage
+## How to Use the Application
 
-Run commands from the project root directory.
+Run the commands from the project directory.
 
-### Display available commands
+### View available commands
 
 ```bash
 python main.py --help
@@ -69,7 +96,7 @@ python main.py add-project \
   --owner-id 1
 ```
 
-Dates must use the `YYYY-MM-DD` format.
+The due date must use the `YYYY-MM-DD` format.
 
 ### List projects
 
@@ -79,7 +106,7 @@ python main.py list-projects
 
 ### Add a task
 
-The project ID must exist. Contributor IDs are optional and must belong to existing users.
+The project ID must belong to an existing project. Contributor IDs are optional.
 
 ```bash
 python main.py add-task \
@@ -94,23 +121,23 @@ python main.py add-task \
 python main.py list-tasks
 ```
 
-### Mark a task complete
+### Complete a task
 
 ```bash
 python main.py complete-task --task-id 1
 ```
 
-## Running the tests
+## Running the Tests
 
-Install the dependencies, activate the virtual environment, and run:
+With the virtual environment activated, run:
 
 ```bash
 pytest -v
 ```
 
-The test suite covers model behavior, manager validation, persistence, and CLI commands.
+The tests check the model classes, project management operations, data persistence, and command-line behavior.
 
-## Project structure
+## Project Structure
 
 ```text
 project-management-cli/
@@ -136,24 +163,20 @@ project-management-cli/
 └── README.md
 ```
 
-## Data storage
+Two additional scripts, `test_person.py` and `test_storage.py`, are included for manual testing.
 
-Application data is stored in `data/database.json`. The application creates the data file and its parent directory when needed. Back up this file if you need to preserve your records.
+## Data Storage
+
+The application stores users, projects, and tasks in `data/database.json`. It uses IDs to link projects to their owners and tasks to their projects and contributors.
+
+The local database is excluded from Git, so each installation can create its own data file.
 
 ## Limitations
 
-- Data is stored locally in JSON rather than in a database server.
-- The application is designed for command-line use; it does not include a graphical interface.
-- User authentication and multi-user access control are not implemented.
+- Data is stored in a local JSON file rather than a database server.
+- The application runs in the terminal and does not have a graphical interface.
+- User authentication and access control are not implemented.
 
-## Technologies
+## Repository
 
-- Python
-- Object-oriented programming
-- `argparse`
-- JSON
-- `pytest`
-
-## License
-
-No license has been selected yet. Add a license before distributing or reusing this project publicly.
+GitHub: https://github.com/hafsamohabah/project-management-cli
