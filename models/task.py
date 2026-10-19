@@ -86,3 +86,17 @@ class Task:
             f"Project: {self.project.title} | "
             f"Contributors: {contributor_names or 'None'}"
         )
+
+    def __repr__(self):
+        """Return a representation useful for debugging."""
+        contributor_ids = [
+            user.id for user in self._contributors
+        ]
+
+        return (
+            f"Task(id={self.id!r}, "
+            f"title={self.title!r}, "
+            f"status={self.status!r}, "
+            f"project_id={self.project.id!r}, "
+            f"contributor_ids={contributor_ids!r})"
+        )

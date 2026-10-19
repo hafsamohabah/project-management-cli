@@ -13,3 +13,10 @@ class Person:
     def __str__(self):
         """Return a readable description of the person."""
         return f"{self.name} ({self.email})"
+
+    def __repr__(self):
+        """Return a representation useful for debugging."""
+        return (
+            f"Person(name={self.name!r}, "
+            f"email={self.email!r})"
+        )

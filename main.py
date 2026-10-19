@@ -18,7 +18,7 @@ def build_parser():
         required=True,
     )
 
-    # Add user command.
+    # Command for creating a user.
     add_user_parser = subparsers.add_parser(
         "add-user",
         help="Create a new user.",
@@ -26,13 +26,13 @@ def build_parser():
     add_user_parser.add_argument("--name", required=True)
     add_user_parser.add_argument("--email", required=True)
 
-    # List users command.
+    # Command for listing users.
     subparsers.add_parser(
         "list-users",
         help="Display all users.",
     )
 
-    # Add project command.
+    # Command for creating a project.
     add_project_parser = subparsers.add_parser(
         "add-project",
         help="Create a project.",
@@ -50,13 +50,13 @@ def build_parser():
         type=int,
     )
 
-    # List projects command.
+    # Command for listing projects.
     subparsers.add_parser(
         "list-projects",
         help="Display all projects.",
     )
 
-    # Add task command.
+    # Command for creating a task.
     add_task_parser = subparsers.add_parser(
         "add-task",
         help="Create a task for a project.",
@@ -75,13 +75,13 @@ def build_parser():
         help="Optional contributor user IDs.",
     )
 
-    # List tasks command.
+    # Command for listing tasks.
     subparsers.add_parser(
         "list-tasks",
         help="Display all tasks.",
     )
 
-    # Complete task command.
+    # Command for completing a task.
     complete_parser = subparsers.add_parser(
         "complete-task",
         help="Mark a task as complete.",
@@ -96,13 +96,14 @@ def build_parser():
 
 
 def main():
-    """Parse a command and execute the requested operation."""
+    """Run the command selected by the user."""
     parser = build_parser()
     args = parser.parse_args()
 
-    manager = ProjectManager()
-
     try:
+        # Initialize the manager inside the error handler.
+        manager = ProjectManager()
+
         if args.command == "add-user":
             user = manager.add_user(args.name, args.email)
             print(f"User created successfully: {user}")

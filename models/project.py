@@ -3,6 +3,8 @@
 
 from datetime import date
 
+from models.user import User
+
 
 class Project:
     """Represent a project owned by a user."""
@@ -18,7 +20,12 @@ class Project:
         self.description = description
 
         if isinstance(due_date, str):
-            due_date = date.fromisoformat(due_date)
+            try:
+                due_date = date.fromisoformat(due_date)
+            except ValueError as error:
+                raise ValueError(
+                    "Due date must use YYYY-MM-DD format."
+                ) from error
 
         if not isinstance(due_date, date):
             raise TypeError(
@@ -66,4 +73,13 @@ class Project:
             f"Project {self._id}: {self.title} | "
             f"Owner: {self.owner.name} | "
             f"Due: {self.due_date}"
+        )
+
+    def __repr__(self):
+        """Return a representation useful for debugging."""
+        return (
+            f"Project(id={self.id!r}, "
+            f"title={self.title!r}, "
+            f"due_date={self.due_date!r}, "
+            f"owner_id={self.owner.id!r})"
         )

@@ -41,3 +41,11 @@ class User(Person):
     def __str__(self):
         """Return a readable description of the user."""
         return f"User {self._id}: {self.name} ({self.email})"
+
+    def __repr__(self):
+        """Return a representation useful for debugging."""
+        return (
+            f"User(id={self.id!r}, "
+            f"name={self.name!r}, "
+            f"email={self.email!r})"
+        )
